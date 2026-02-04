@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Icône pour téléphone -->
+<link rel="icon" href="heart.png">
+<link rel="apple-touch-icon" href="heart.png">
+
+<meta charset="UTF-8">
+<title>Un gift spécial</title>
+
+<!-- Google Font luxe minimaliste -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+<style>
+/* Corps de page romantique et sobre */
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #fff0f5; /* doux crème rosé */
+  color: #8b1a2b; /* bordeaux doux */
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Titres élégants */
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2em;
+  letter-spacing: 1px;
+  color: #8b1a2b; /* bordeaux */
+  text-shadow: 0 0 5px #ffc0cb33; /* léger halo rose */
+  margin: 10px 0;
+}
+
+/* Écran mot de passe */
+#login {
+  position: fixed;
+  inset: 0;
+  background: #fff0f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  padding: 12px;
+  font-size: 1em;
+  border-radius: 12px;
+  border: 1px solid #ffb6c1; /* rose tendre */
+  background: transparent;
+  color: #8b1a2b;
+  margin: 10px;
+  text-align: center;
+}
+
+input::placeholder {
+  color: #d4a5b5;
+}
+
+/* Boutons luxe rose tendre et doré */
+button {
+  padding: 12px 18px;
+  border-radius: 30px;
+  border: 1px solid #ffb6c1;
+  background: transparent;
+  color: #8b1a2b;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ffb6c1;
+  color: #fff0f5;
+  border-color: #ff69b4; /* rose plus vif au hover */
+}
+
+/* Intro machine à écrire */
+#intro {
+  max-width: 650px;
+  margin: 20px auto;
+  font-size: 1.2em;
+  line-height: 1.8;
+  color: #8b1a2b;
+  min-height: 120px;
+}
+
+/* Bouton continuer */
+#continueBtn {
+  margin-top: 20px;
+  display: none;
+}
+
+/* Section souvenirs */
+#memoriesSection {
+  display: none;
+}
+
+/* Zone souvenirs */
+#memoryBox {
+  margin-top: 25px;
+  font-size: 1.2em;
+  color: #8b1a2b;
+}
+
+/* Zone souvenirs personnels */
+#personalMemory {
+  margin-top: 20px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  display: block;
+}
+
+#personalMemory h3 {
+  color: #ff69b4; /* rose vif pour accent romantique */
+}
+
+#personalMemory textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ffb6c1;
+  background: #fff5f7;
+  color: #8b1a2b;
+  font-family: 'Playfair Display', serif;
+  font-size: 1em;
+  resize: none;
+}
+
+#personalMemory button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+#submittedMemories {
+  margin-top: 15px;
+  text-align: left;
+  color: #8b1a2b;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#submittedMemories li {
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ffc0cb55; /* léger rappel rose */
+  padding-bottom: 5px;
+}
+
+/* Pluie de cœurs rose et doré */
+.heart {
+  position: fixed;
+  top: -10px;
+  font-size: 18px;
+  animation: fall linear infinite;
+  opacity: 0.6;
+}
+.heart.gold { color: #ffd700; }
+.heart.love { color: #ff69b4; }
+
+@keyframes fall {
+  to { transform: translateY(100vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Écran mot de passe -->
+<div id="login">
+  <h2>Bienvenue namouuur </h2>
+  <h2>Mot de passe stp</h2>
+  <input type="password" id="password" placeholder="Entre le mot de passe">
+  <button onclick="checkPassword()">C’est parti</button>
+</div>
+
+<!-- Contenu principal -->
+<div id="main">
+
+  <h1>Schatzi</h1>
+
+  <!-- Intro machine à écrire -->
+  <p id="intro"></p>
+  <button id="continueBtn" onclick="enterMemories()">Let’s goooo 💌</button>
+
+  <!-- Section souvenirs -->
+  <div id="memoriesSection">
+
+    <div>
+      <button onclick="showMemory(0)">Premier souvenir</button>
+      <button onclick="showMemory(1)">Moment drôle</button>
+      <button onclick="showMemory(2)">Jour spécial</button>
+      <button onclick="showMemory(3)">Souvenir simple</button>
+    </div>
+
+    <div id="memoryBox">Clique sur un souvenir baby ❤️</div>
+
+    <!-- Zone souvenirs personnels -->
+    <div id="personalMemory">
+      <h3>Laisse ton souvenir ici </h3>
+      <textarea id="memoryInput" rows="3" placeholder="Tout ce que tu veux ..."></textarea>
+      <button onclick="submitMemory()">Envoyer</button>
+      <ul id="submittedMemories"></ul>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+// 🔐 Mot de passe
+const secretPassword = "Daarin";
+
+function checkPassword() {
+  const input = document.getElementById("password").value;
+  if (input === secretPassword) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    startHearts();
+    startIntro();
+  } else {
+    alert("Mot de passe incorrect ohh");
+  }
+}
+
+// ✍️ Intro machine à écrire
+const introText = `Bienvenue mon chéri Coco. Ici ta codeuse.
+Si tu as réussi à ouvrir cette page,bravooo, tu as passé la première étape de trouver le mot de passe.
+Maintenant je t’explique un peu ce qui t’attend.
+T’inquiète, c’est quelque chose de simple que j’ai voulu faire pour nous rappeler quelques-uns de nos beaux souvenirs.
+
+D´abord, tu clique sur "Let’s goooo" pour continuer.
+Tu pourras découvrir des souvenirs que j’ai sélectionnés pour nous.
+Et enfin tu pourras aussi écrire tes propres souvenirs avec moi et je les verrai `
+;
+let i = 0;
+function startIntro() { typeWriter(); }
+
+function typeWriter() {
+  if (i < introText.length) {
+    document.getElementById("intro").innerHTML += introText.charAt(i);
+    i++;
+    setTimeout(typeWriter, 35);
+  } else {
+    document.getElementById("continueBtn").style.display = "inline-block";
+  }
+}
+
+function enterMemories() {
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("continueBtn").style.display = "none";
+  document.getElementById("memoriesSection").style.display = "block";
+}
+
+// 💭 Souvenirs
+const memories = [
+  "Notre première discussion… je m’en souviens encore.",
+  "On a tellement ri ce jour-là 😄",
+  "Ce jour spécial restera gravé dans ma mémoire.",
+  "Même les moments simples sont précieux."
+];
+
+function showMemory(i) {
+  document.getElementById("memoryBox").textContent = memories[i];
+}
+
+// ✍️ Souvenirs personnels
+function submitMemory() {
+  const input = document.getElementById("memoryInput");
+  const text = input.value.trim();
+  if(text !== "") {
+    const li = document.createElement("li");
+    li.textContent = text;
+    document.getElementById("submittedMemories").appendChild(li);
+    input.value = "";
+  }
+}
+
+// ❤️ Pluie de cœurs rose et doré
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart " + (Math.random() > 0.5 ? "gold" : "love");
+    heart.innerText = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random()*3 + 2) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+}
+
+// 💌 Souvenir perso avec sauvegarde et suppression
+function submitMemory() {
+  const input = document.getElementById("memoryInput");
+  const text = input.value.trim();
+  if (text !== "") {
+    addMemoryToDOM(text);
+    saveMemory(text);
+    input.value = "";
+  }
+}
+
+function addMemoryToDOM(text) {
+  const ul = document.getElementById("submittedMemories");
+  const li = document.createElement("li");
+  li.textContent = text;
+
+  // Créer bouton supprimer
+  const delBtn = document.createElement("button");
+  delBtn.textContent = "Supprimer ❌";
+  delBtn.style.marginLeft = "10px";
+  delBtn.onclick = () => {
+    ul.removeChild(li);
+    removeMemory(text);
+  };
+
+  li.appendChild(delBtn);
+  ul.appendChild(li);
+}
+
+// Sauvegarde dans localStorage
+function saveMemory(text) {
+  let saved = JSON.parse(localStorage.getItem("memories")) || [];
+  saved.push(text);
+  localStorage.setItem("memories", JSON.stringify(saved));
+}
+
+// Suppression du localStorage
+function removeMemory(text) {
+  let saved = JSON.parse(localStorage.getItem("memories")) || [];
+  saved = saved.filter(msg => msg !== text); // supprime le message ciblé
+  localStorage.setItem("memories", JSON.stringify(saved));
+}
+
+// Recharge les souvenirs au chargement
+window.onload = function() {
+  let saved = JSON.parse(localStorage.getItem("memories")) || [];
+  saved.forEach(msg => addMemoryToDOM(msg));
+};
+
+</script>
+
+</body>
+</html>
