@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="icon" href="heart.png">
 <link rel="apple-touch-icon" href="heart.png">
@@ -18,8 +17,8 @@
 body {
   margin: 0;
   overflow: hidden;
-  background: #fff0f5; /* doux crème rosé */
-  color: #8b1a2b; /* bordeaux doux */
+  background: #fff0f5;
+  color: #8b1a2b;
   text-align: center;
   font-family: 'Playfair Display', serif;
 }
@@ -29,8 +28,8 @@ h1, h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2.2em;
   letter-spacing: 1px;
-  color: #8b1a2b; /* bordeaux */
-  text-shadow: 0 0 5px #ffc0cb33; /* léger halo rose */
+  color: #8b1a2b;
+  text-shadow: 0 0 5px #ffc0cb33;
   margin: 10px 0;
 }
 
@@ -49,7 +48,7 @@ input {
   padding: 12px;
   font-size: 1em;
   border-radius: 12px;
-  border: 1px solid #ffb6c1; /* rose tendre */
+  border: 1px solid #ffb6c1;
   background: transparent;
   color: #8b1a2b;
   margin: 10px;
@@ -59,6 +58,7 @@ input {
 input::placeholder {
   color: #d4a5b5;
 }
+
 button {
   padding: 12px 18px;
   border-radius: 30px;
@@ -76,6 +76,7 @@ button:hover {
   color: #fff0f5;
   border-color: #ff69b4; 
 }
+
 #intro {
   max-width: 650px;
   margin: 20px auto;
@@ -84,10 +85,12 @@ button:hover {
   color: #8b1a2b;
   min-height: 120px;
 }
+
 #continueBtn {
   margin-top: 20px;
   display: none;
 }
+
 #memoriesSection {
   display: none;
 }
@@ -110,7 +113,7 @@ button:hover {
 }
 
 #personalMemory h3 {
-  color: #ff69b4; /* rose vif pour accent romantique */
+  color: #ff69b4;
 }
 
 #personalMemory textarea {
@@ -141,7 +144,7 @@ button:hover {
 
 #submittedMemories li {
   margin-bottom: 5px;
-  border-bottom: 1px solid #ffc0cb55; /* léger rappel rose */
+  border-bottom: 1px solid #ffc0cb55;
   padding-bottom: 5px;
 }
 
@@ -186,7 +189,7 @@ button:hover {
 
     <div>
       <button onclick="showMemory(0)">Premier souvenir</button>
-      <button onclick="showMemory(1)">premiere dédicace</button>
+      <button onclick="showMemory(1)">Première dédicace</button>
       <button onclick="showMemory(2)">Jour spécial</button>
       <button onclick="showMemory(3)">Souvenir simple</button>
     </div>
@@ -225,9 +228,8 @@ function checkPassword() {
 const introText = `Bienvenue mon chéri Coco. Ici ta codeuse.
 Si tu as réussi à ouvrir cette page, c´est que tu as passé la première étape de trouver le mot de passe.
 Maintenant je t’explique un peu ce qui t’attend.
-C´est juste un simple message dédicacé de plusieurs chansons pour te dire a quel point je t´aime fort. Certaines chansons que j’ai trouvé et aimé étaient destinées aux femmes.
-Je te les envoie telles quelles… mais sache que les paroles m’ont immédiatement fait penser à toi. Je t’aime mon Régis💖   `
-;
+C´est juste un simple message dédicacé de plusieurs chansons pour te dire à quel point je t´aime fort. Certaines chansons que j’ai trouvées et aimées étaient destinées aux femmes.
+Je te les envoie telles quelles… mais sache que les paroles m’ont immédiatement fait penser à toi. Je t’aime mon Régis💖`;
 let i = 0;
 function startIntro() { typeWriter(); }
 
@@ -247,45 +249,33 @@ function enterMemories() {
   document.getElementById("memoriesSection").style.display = "block";
 }
 
-// 💭 Souvenirs
+// 💭 Souvenirs avec message et lien YouTube
 const memories = [
-  "A quel point je t´aime ",
-  "On a tellement ri ce jour-là 😄",
-  "Ce jour spécial restera gravé dans ma mémoire.",
-  "Même les moments simples sont précieux."
+  {
+    text: "Cette chanson me fait penser à notre premier rendez-vous ❤️",
+    link: "https://youtu.be/h7SwTTe1aHk?si=Gv0sJ_hna1_xsdFe"
+  },
+  {
+    text: "Une petite dédicace pour te dire combien je t’aime 💖",
+    link: "https://youtu.be/VIDEO_ID_2"
+  },
+  {
+    text: "Ce jour spécial restera gravé dans nos cœurs 🌹",
+    link: "https://youtu.be/VIDEO_ID_3"
+  },
+  {
+    text: "Même les moments simples sont précieux avec toi 💌",
+    link: "https://youtu.be/VIDEO_ID_4"
+  }
 ];
-    <a href="https://youtu.be/h7SwTTe1aHk?si=Gv0sJ_hna1_xsdFe" target="_blank">Clique ici 🎵</a>
 
 function showMemory(i) {
-  document.getElementById("memoryBox").textContent = memories[i];
+  const memoryBox = document.getElementById("memoryBox");
+  memoryBox.innerHTML = `${memories[i].text} <br>
+    <a href="${memories[i].link}" target="_blank">🎵 Écoute la chanson</a>`;
 }
 
-// ✍️ Souvenirs personnels
-function submitMemory() {
-  const input = document.getElementById("memoryInput");
-  const text = input.value.trim();
-  if(text !== "") {
-    const li = document.createElement("li");
-    li.textContent = text;
-    document.getElementById("submittedMemories").appendChild(li);
-    input.value = "";
-  }
-}
-
-// ❤️ Pluie de cœurs rose et doré
-function startHearts() {
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart " + (Math.random() > 0.5 ? "gold" : "love");
-    heart.innerText = "❤";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random()*3 + 2) + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-  }, 300);
-}
-
-// 💌 Souvenir perso avec sauvegarde et suppression
+// ✍️ Souvenirs personnels avec sauvegarde
 function submitMemory() {
   const input = document.getElementById("memoryInput");
   const text = input.value.trim();
@@ -301,7 +291,6 @@ function addMemoryToDOM(text) {
   const li = document.createElement("li");
   li.textContent = text;
 
-  // Créer bouton supprimer
   const delBtn = document.createElement("button");
   delBtn.textContent = "Supprimer ❌";
   delBtn.style.marginLeft = "10px";
@@ -314,17 +303,15 @@ function addMemoryToDOM(text) {
   ul.appendChild(li);
 }
 
-// Sauvegarde dans localStorage
 function saveMemory(text) {
   let saved = JSON.parse(localStorage.getItem("memories")) || [];
   saved.push(text);
   localStorage.setItem("memories", JSON.stringify(saved));
 }
 
-// Suppression du localStorage
 function removeMemory(text) {
   let saved = JSON.parse(localStorage.getItem("memories")) || [];
-  saved = saved.filter(msg => msg !== text); // supprime le message ciblé
+  saved = saved.filter(msg => msg !== text);
   localStorage.setItem("memories", JSON.stringify(saved));
 }
 
@@ -332,12 +319,25 @@ function removeMemory(text) {
 window.onload = function() {
   let saved = JSON.parse(localStorage.getItem("memories")) || [];
   saved.forEach(msg => addMemoryToDOM(msg));
-};
+}
 
+// ❤️ Pluie de cœurs rose et doré
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart " + (Math.random() > 0.5 ? "gold" : "love");
+    heart.innerText = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random()*3 + 2) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+}
 </script>
 
 </body>
 </html>
+
 
 
 
